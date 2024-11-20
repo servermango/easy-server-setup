@@ -383,12 +383,18 @@ while [[ "$#" -gt 0 ]]; do
             ;;
         --hide-pma)
             domain=$2
-            hide_phpmyadmin 
+            hide_phpmyadmin
             shift 2
             ;;
         --show-pma)
             domain=$2
             show_phpmyadmin $domain
+            shift 2
+            ;;
+        --install-ssl)
+            ssl_domain=$2
+            install_ssl $ssl_domain
+            add_ssl_to_vhost $ssl_domain
             shift 2
             ;;
         *)
@@ -397,6 +403,7 @@ while [[ "$#" -gt 0 ]]; do
             ;;
     esac
 done
+
 
 # Execute installation if --install-basics was passed
 if [ "$install_basics_flag" = true ]; then
