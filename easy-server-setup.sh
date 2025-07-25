@@ -290,10 +290,14 @@ install_ssl() {
 remove_domain() {
     domain=$1
     conf_file="/etc/apache2/sites-available/$domain.conf"
-
+    conf_file2="/etc/apache2/sites-enabled/$domain.conf"
+    
     # Disable the site
     sudo a2dissite $domain.conf
 
+    # remove enabled site config
+    sudo rm -f $conf_file2
+    
     # Remove the configuration file
     sudo rm -f $conf_file
 
@@ -302,6 +306,8 @@ remove_domain() {
 
     # Reload Apache
     sudo systemctl reload apache2
+    
+    sudo systemctl restart apache2
 
     echo "Removed Apache config and SSL for $domain"
 }
