@@ -45,6 +45,7 @@ install_apache() {
     sudo apt update
     sudo apt install apache2 -y
     sudo a2enmod rewrite
+    sudo a2enmod ssl
     sudo systemctl restart apache2
 }
 
